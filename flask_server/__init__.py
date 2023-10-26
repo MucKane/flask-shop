@@ -18,5 +18,9 @@ def create_app(config_name):
     app.config.from_object(Config)
     # 初始化db
     db.init_app(app)
+    # 获取user蓝图对象
+    from flask_server.user import user_bp
+    # 注册蓝图
+    app.register_blueprint(user_bp)
     # 返回实例
     return app
