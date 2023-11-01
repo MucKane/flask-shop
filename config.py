@@ -16,9 +16,10 @@ class Config:
     # 连接数据库
     SQLALCHEMY_DATABASE_URI = f'{MYSQL_DIALECT}+{MYSQL_DRIVER}://{MYSQL_USERNAME}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DB}?charset={MYSQL_CHARSET}'
     debug = True
-
     # 数据盐
     SECRET_KEY = urandom(24)
+    # json 不使用ascii编码
+    JSON_AS_ASCII = False
     
 class TestConfig(Config):
     pass

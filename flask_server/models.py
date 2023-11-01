@@ -4,13 +4,13 @@
 
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_server import db
-from datatime import datetime
+from datetime import datetime
 
-class BaseModel(db.Model):
+class BaseModel(object):
     create_time = db.Column(db.DateTime, default=datetime.now)
     update_time = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
-class User(db.Model):
+class User(db.Model,BaseModel):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     name = db.Column(db.String(20), nullable=False, unique=True)
