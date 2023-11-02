@@ -13,7 +13,7 @@ def login():
   # name = request.form.get('name')  # content-type: application/x-www-form-urlencoded
   name = request.get_json().get("name") # content-type: application/json
   # 获取密码
-  password = request.get_json().get("pwd")
+  password = request.get_json().get("password")
   # 判断是否传递数据完整
   if not all([name, password]):
     return {'status': 400, 'msg': '参数不完整'}
