@@ -3,6 +3,7 @@ from flask_server import models,db
 from flask import request
 from flask_restful import Resource
 import re
+from flask_server.utils.token import generate_token,check_token
 # 创建视图
 @user_bp.route('/')
 def index():
@@ -26,7 +27,9 @@ def login():
     if user:
       # 判断密码是否正确
       if user.check_password(password):
-        return {'status': 200, 'msg': '登录成功'}
+        # 生成token
+        token = generate_token(user.id)
+        return {'status': 200, 'msg': '登录成功', 'token': token}
     return {'status': 400, 'msg': '用户名或密码错误'}
 
 # 注册功能
