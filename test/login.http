@@ -5,3 +5,15 @@ Content-Type: application/json
     "name":"baizan",
     "password":"123456"
 }
+
+### 测试用户注册功能
+POST http://127.0.0.1:5000/user/users/
+Content-Type: application/json
+
+{
+    "name":"zhangsan",
+    "pwd":"123456",
+    "rel_password":"123456",
+    "phone":"18811100166",
+    "email":"123456@nihao.com"
+}
