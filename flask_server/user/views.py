@@ -62,7 +62,7 @@ class Users(Resource):
         return {'status': 400, 'msg': '用户名已存在'}
     except Exception as e:
       # 没有已经存在的用户 逻辑继续进行
-      print(e)
+      pass
     
     # 创建对象
     user = models.User(name=name, password=pwd, phone=phone, email=email)
