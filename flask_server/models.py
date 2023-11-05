@@ -14,7 +14,7 @@ class User(db.Model,BaseModel):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     name = db.Column(db.String(20), nullable=False, unique=True)
-    pwd = db.Column(db.String(20), nullable=False)
+    pwd = db.Column(db.String(50), nullable=False)
     phone = db.Column(db.String(20), nullable=False, unique=True)
     email = db.Column(db.String(20), nullable=False, unique=True)
 
