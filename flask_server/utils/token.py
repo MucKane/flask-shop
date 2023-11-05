@@ -4,7 +4,7 @@
 # author: wangjiayi
 import jwt
 from flask import current_app
-
+import time
 # 生成token
 def generate_token(user_id):
     # 生成token
@@ -13,6 +13,8 @@ def generate_token(user_id):
     # 导入密钥
     secret_key = current_app.config['SECRET_KEY']
     # 生成token
+    # 设置token过期时间
+    user_id.update({'exp':time.time()+current_app.config['TOKEN_DURATION']})
     # 传递的参数一定要以字典的形式传递 否则报错
     token = jwt.encode({'user_id':user_id},secret_key,algorithm='HS256')
     # 返回token
