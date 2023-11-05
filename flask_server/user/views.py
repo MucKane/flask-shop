@@ -1,5 +1,5 @@
 from flask_server.user import user_bp,user_api
-from flask_server import models 
+from flask_server import models,db
 from flask import request
 from flask_restful import Resource
 import re
@@ -39,7 +39,6 @@ class Users(Resource):
     name = request.get_json().get('name')
     pwd = request.get_json().get('pwd')
     rel_password = request.get_json().get('rel_password')
-    nick_name = request.get_json().get('nick_name')
     # 验证数据的合法性
     if not all([name, pwd, rel_password]):
       return {'status': 400, 'msg': '参数不完整'}
@@ -63,10 +62,14 @@ class Users(Resource):
         return {'status': 400, 'msg': '用户名已存在'}
     except Exception as e:
       # 没有已经存在的用户 逻辑继续进行
-      pass
+      print(e)
     
     # 创建对象
-    user = models.User(name=name, password=pwd, phone=phone, email=email,nick_name=nick_name)
+    user = models.User(name=name, password=pwd, phone=phone, email=email)
+    # 保存到数据库
+    db.session.add(user)
+    db.session.commit()
     return{'status': 200, 'msg': '注册成功'}
+  
 
 user_api.add_resource(Users,'/users/')
