@@ -20,6 +20,7 @@ class Config:
     SECRET_KEY = urandom(24)
     # json 不使用ascii编码
     JSON_AS_ASCII = False
+    RESTFUL_JSON = {'ensure_ascii': False}
     
 class TestConfig(Config):
     pass
