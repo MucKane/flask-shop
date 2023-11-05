@@ -3,7 +3,7 @@ from flask_server import models,db
 from flask import request
 from flask_restful import Resource
 import re
-from flask_server.utils.token import generate_token,check_token
+from flask_server.utils.token import generate_token,check_token,login_required
 # 创建视图
 @user_bp.route('/')
 def index():
@@ -74,5 +74,9 @@ class Users(Resource):
     db.session.commit()
     return{'status': 200, 'msg': '注册成功'}
   
-
 user_api.add_resource(Users,'/users/')
+
+@user_bp.route('/test/')
+@login_required
+def login_test():
+  return {'status':200,'msg':'test success'}

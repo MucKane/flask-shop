@@ -21,6 +21,8 @@ class Config:
     # json 不使用ascii编码
     JSON_AS_ASCII = False
     RESTFUL_JSON = {'ensure_ascii': False}
+    # token duration
+    TOKEN_DURATION = 60 * 60 * 24 * 7 # 7 days
     
 class TestConfig(Config):
     pass
