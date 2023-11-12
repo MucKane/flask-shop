@@ -18,6 +18,11 @@ Content-Type: application/json
     "email":"123456@nihao.com"
 }
 
+
 ### 测试登陆验证器
 GET http://127.0.0.1:5000/user/test/
 # token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyfQ.SObxIkLXL2N00lapaMjLZRpFC5jpcVR6n_17frpHz0A
+
+# time:11/12
+### 测试menu逻辑是否正确
+GET http://127.0.0.1:5000/menu/menus/?type_=tree

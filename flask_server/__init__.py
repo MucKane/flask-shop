@@ -22,5 +22,9 @@ def create_app(config_name):
     from flask_server.user import user_bp
     # 注册蓝图
     app.register_blueprint(user_bp)
+    
+    # 获取menu蓝图对象 time:2023/11/12
+    from flask_server.menu import menu_bp
+    app.register_blueprint(menu_bp)
     # 返回实例
     return app

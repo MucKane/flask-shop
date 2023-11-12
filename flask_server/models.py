@@ -36,16 +36,25 @@ class Menu(db.Model):
     name = db.Column(db.String(20), nullable=False, unique=True)
     level = db.Column(db.Integer, default=1)
     path = db.Column(db.String(50))
-    pid = db.Column(db.Integer, default=-1)
+    pid = db.Column(db.Integer, db.ForeignKey('menu.id'))
     children = db.relationship('Menu')
 
     # 传递回前端要以json的形式
-    def to_dict(self):
+    def to_dict_tree(self):
         return {
             'id':self.id,
             'name':self.name,
             'level':self.level,
             'path':self.path,
             'pid':self.pid,
-            'children':[child.to_dict() for child in self.children]
+            'children':[child.to_dict_tree() for child in self.children]
+        }
+
+    def to_dict_list(self):
+        return{
+            'id':self.id,
+            'name':self.name,
+            'level':self.level,
+            'path':self.path,
+            'pid':self.pid
         }
