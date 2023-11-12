@@ -14,7 +14,7 @@ class User(db.Model,BaseModel):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     name = db.Column(db.String(20), nullable=False, unique=True)
-    pwd = db.Column(db.String(50), nullable=False)
+    pwd = db.Column(db.String(144), nullable=False)
     phone = db.Column(db.String(20), nullable=False, unique=True)
     email = db.Column(db.String(20), nullable=False, unique=True)
 
@@ -28,3 +28,24 @@ class User(db.Model,BaseModel):
 
     def check_password(self,pwd):
         return check_password_hash(self.pwd,pwd)
+    
+# TODO:菜单模型
+class Menu(db.Model):
+    __tablename__ = 'menu'
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    name = db.Column(db.String(20), nullable=False, unique=True)
+    level = db.Column(db.Integer, default=1)
+    path = db.Column(db.String(50))
+    pid = db.Column(db.Integer, default=-1)
+    children = db.relationship('Menu')
+
+    # 传递回前端要以json的形式
+    def to_dict(self):
+        return {
+            'id':self.id,
+            'name':self.name,
+            'level':self.level,
+            'path':self.path,
+            'pid':self.pid,
+            'children':[child.to_dict() for child in self.children]
+        }
